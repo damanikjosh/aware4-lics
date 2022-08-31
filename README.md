@@ -6,7 +6,7 @@ A template to generate custom world for [Aware4 Docker](https://hub.docker.com/r
 
 In order to generate custom world in the simulator, you need to modify three files.
 
-1. Create your own models and worlds and save it under folders `models` and `worlds`, respectively.
+1. Create your own models, worlds, and scenarios. Save it under folders `models`, `worlds`, and `scenarios`, respectively.
 2. In `sitl_target.cmake` look for the following line, and add your world name at the end
     ```
     set(worlds
@@ -23,7 +23,11 @@ In order to generate custom world in the simulator, you need to modify three fil
         ```
     - For gazebo worlds
         ```
-        -v $(pwd)/worlds/<WORLD_NAME>:/root/PX4-Autopilot/Tools/sitl_gazebo/worlds/<WORLD_NAME>.world\
+        -v $(pwd)/worlds/<WORLD_NAME>.world:/root/PX4-Autopilot/Tools/sitl_gazebo/worlds/<WORLD_NAME>.world\
+        ```
+    - For scenarios
+        ```
+        -v $(pwd)/scenarios/<SCENARIO_NAME>.py:/root/px4_ros_com_ros2/build/rtps_command/build/lib/rtps_command/<SCENARIO_NAME>.py\
         ```
 
 ## Installation
@@ -43,9 +47,20 @@ After that, you can run the simulation environment by running the following comm
 3. After the build finished, stop the running script
 4. Deploy the generated gazebo environment
     ```
-    ~/PX4-Autopilot/Tools/qtr_multiple_run.sh -s Hexa_vtol:1 -w <WORLD_NAME>
+    ~/test_process.sh /root/PX4-Autopilot/ /root/px4_ros_com_ros2/ <SCENARIO_NAME>.py 0 QTR:1 <WORLD_NAME> <NUM_VEHICLES>
+    ----
+    Example:
+    ~/test_process.sh /root/PX4-Autopilot/ /root/px4_ros_com_ros2/ test_scenario.py 0 QTR:1 muin_area 1
     ```
 
-## Screenshot
+
+
+## Simulation
+
+Video simulation: https://www.youtube.com/watch?v=91cikrIAtM8
 
 ![Environment](screenshot.png "Environment")
+
+## Todo List
+
+- [ ] Generate scenario script for multi-vehicles
