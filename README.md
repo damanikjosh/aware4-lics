@@ -47,7 +47,7 @@ After that, you can run the simulation environment by running the following comm
 3. After the build finished, stop the running script
 4. Deploy the generated gazebo environment
     ```
-    ~/test_process.sh /root/PX4-Autopilot/ /root/px4_ros_com_ros2/ <SCENARIO_NAME>.py 0 QTR:1 <WORLD_NAME> <NUM_VEHICLES>
+    ~/test_process.sh /root/PX4-Autopilot/ /root/px4_ros_com_ros2/ <SCENARIO_NAME>.py 0 <MODEL_NAME> <WORLD_NAME> <NUM_VEHICLES>
     ----
     Example:
     ~/test_process.sh /root/PX4-Autopilot/ /root/px4_ros_com_ros2/ test_scenario.py 0 QTR:1 muin_area 1
