@@ -23,7 +23,7 @@ In order to generate custom world in the simulator, you need to modify three fil
         ```
     - For gazebo worlds
         ```
-        -v $(pwd)/worlds/<WORLD_NAME>:/root/PX4-Autopilot/Tools/sitl_gazebo/worlds/<WORLD_NAME>\
+        -v $(pwd)/worlds/<WORLD_NAME>:/root/PX4-Autopilot/Tools/sitl_gazebo/worlds/<WORLD_NAME>.world\
         ```
 
 ## Installation
