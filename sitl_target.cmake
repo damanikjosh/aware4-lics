@@ -155,6 +155,7 @@ set(worlds
         plain_ocean
         plain_ocean_obstacle
         muin_area
+        mangalia
 )
 
 set(all_posix_vmd_make_targets)

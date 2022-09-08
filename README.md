@@ -35,22 +35,27 @@ In order to generate custom world in the simulator, you need to modify three fil
 Before running the simulation you need to install both Docker and CUDA container toolkit. You can follow the guide [here](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html).
 
 After that, you can run the simulation environment by running the following commands
-1. Run the docker container with the provided script
+1. Run xhost command below
+    ```
+    xhost +local:docker
+    ```
+2. Run the docker container with the provided script
     ```
     sudo ./docker_init.sh
     ```
-2. Build your custom world
+3. Build your custom world
     ```
     cd ~/PX4-Autopilot/
     make px4_sitl_rtps gazebo
     ```
-3. After the build finished, stop the running script
-4. Deploy the generated gazebo environment
+4. After the build finished, stop the running script
+5. Deploy the generated gazebo environment
     ```
     ~/test_process.sh /root/PX4-Autopilot/ /root/px4_ros_com_ros2/ <SCENARIO_NAME>.py 0 <MODEL_NAME> <WORLD_NAME> <NUM_VEHICLES>
     ----
     Example:
     ~/test_process.sh /root/PX4-Autopilot/ /root/px4_ros_com_ros2/ test_scenario.py 0 QTR:1 muin_area 1
+    ~/test_process.sh /root/PX4-Autopilot/ /root/px4_ros_com_ros2/ test_scenario.py 0 QTR_cam:1 mangalia 1
     ```
 
 
