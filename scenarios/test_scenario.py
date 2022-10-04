@@ -170,7 +170,7 @@ def main(args=None):
     start_time = time.time()
     rclpy.init(args=args)
 
-    node = Node()
+    node = Node('px4_command_publisher')
 
     lat1, lon1 = xy2latlon(150, 0)
     lat2, lon2 = xy2latlon(150, 90)
@@ -179,14 +179,17 @@ def main(args=None):
     vehicle1 = Vehicle(node, 1, [[lat1, lon1, 5.0],
                                  [lat2, lon2, 5.0],
                                  [lat3, lon3, 5.0]])
+    vehicle2 = Vehicle(node, 2, [[lat1, lon1, 10.0],
+                                 [lat2, lon2, 10.0],
+                                 [lat3, lon3, 10.0]])
 
     exit_value = 0
     # rclpy.spin(scenario_test)
     while rclpy.ok():
-        rclpy.spin_once(vehicle1)
+        rclpy.spin_once(node)
         # time.sleep(0.1)
         cur_time = time.time()
-        if vehicle1.exit_value != -1:
+        if vehicle1.exit_value != -1 and vehicle2.exit_value != -1:
             break
         if cur_time - start_time > 300:
             print("Scenario test time out, " + str(cur_time - start_time))
