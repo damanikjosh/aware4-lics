@@ -56,6 +56,7 @@ After that, you can run the simulation environment by running the following comm
     Example:
     ~/test_process.sh /root/PX4-Autopilot/ /root/px4_ros_com_ros2/ test_scenario.py 0 QTR:1 muin_area 1
     ~/test_process.sh /root/PX4-Autopilot/ /root/px4_ros_com_ros2/ test_scenario.py 0 QTR_cam:1 mangalia_ocean 1
+   ~/test_process.sh /root/PX4-Autopilot/ /root/px4_ros_com_ros2/ test_scenario.py 0 QTR:2 muin 2
     ```
 
 
