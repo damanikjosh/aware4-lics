@@ -24,5 +24,5 @@ docker run --rm\
     -v $(pwd)/config/illegal_fishing:/root/illegal_fishing\
     -v $(pwd)/test.yaml:/root/PX4-Autopilot/msg/tools/urtps_bridge_topics.yaml\
     -v $(pwd)/startup.sh:/root/startup.sh\
-    aware4-lics:v1.1\
-    bash -c "cd /root/PX4-Autopilot/Tools && ./qtr_multiple_run.sh -f /root/illegal_fishing -w smooth & MicroXRCEAgent udp4 -p 5000 & sleep 15 && bash"
+    aware4docker/qtr-px4-ros2-docker-foxy:1.6.0\
+    bash

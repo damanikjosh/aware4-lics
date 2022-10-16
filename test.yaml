@@ -82,5 +82,5 @@ rtps:
   # add
   - msg:     home_position
     send:    true
-  - msg: vehicle_gps_position
-    send: true
+  - msg:     vehicle_gps_position
+    send:    true
