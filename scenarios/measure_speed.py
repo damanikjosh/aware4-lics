@@ -45,6 +45,8 @@ class Vehicle():
         self.status_sub = self.node.create_subscription(VehicleStatus, '/vehicle%d/out/VehicleStatus' % id, self.on_status_callback, 10)
         self.gps_sub = self.node.create_subscription(VehicleGpsPosition, '/vehicle%d/out/VehicleGpsPosition' % id, self.on_gps_callback, 10)
 
+        self.change_speed(0.5)
+
         self.init_pos = []
 
     def on_home_callback(self, msg):
@@ -79,6 +81,7 @@ class Vehicle():
                 self.mode = self.MODE_STANDBY
         if self.mode == self.MODE_LOITER:
             if self.waypoint:
+                self.logger.info(time.time())
                 self.set_position(self.waypoint)
                 self.mode = self.MODE_MOVING
 
@@ -97,6 +100,7 @@ class Vehicle():
                 self.home = np.average(self.init_pos, axis=0).tolist()
                 del self.init_pos
                 self.mode = self.MODE_STANDBY
+                self.logger.info(time.time())
 
         self.pos = coor
         if self.mode == self.MODE_MOVING:
@@ -105,8 +109,9 @@ class Vehicle():
             if dist < 1e-5:
                 self.mode = self.MODE_LOITER
                 self.waypoint = None
+                self.logger.info(time.time())
 
-        self.logger.debug('Received GPS coordinate: [%.4f, %.4f, %.4f]' % tuple(self.pos))
+        self.logger.info('%.4f, %.4f, %.4f' % tuple(self.pos))
 
         # if self.mode == self.MODE_LOITER:
         #     if abs(self.pos[2] - self.flight_alt) > 0.5:
@@ -184,31 +189,33 @@ class Vehicle():
         msg.from_external = True
         self.command.publish(msg)
 
+    def change_speed(self, speed):
+        self.logger.info("send CHANGE SPEED command")
+        msg = VehicleCommand()
+        msg.target_system = self.id
+        msg.command = 178
+        msg.param1 = 0.0
+        msg.param2 = float(speed)
+        msg.param3 = -1.0
+        msg.confirmation = True
+        msg.from_external = True
+        self.command.publish(msg)
+
 def main(args=None):
     start_time = time.time()
     rclpy.init(args=args)
 
     node = Node('px4_command_publisher')
 
-    vehicles = [Vehicle(node, i, 4. + 1. * i) for i in range(1, 10)]
+    vehicles = [Vehicle(node, i, 4. + 2. * i) for i in range(1, 2)]
+    vehicles[0].move(50, -50)
 
     exit_value = 0
-    move_once = True
     # rclpy.spin(scenario_test)
     while rclpy.ok():
         rclpy.spin_once(node)
         # time.sleep(0.1)
         cur_time = time.time()
-
-        all_loiter = True
-        for vehicle in vehicles:
-            if vehicle.mode != vehicle.MODE_LOITER:
-                all_loiter = False
-                break
-
-        if all_loiter:
-            for vehicle in vehicles:
-                vehicle.move(np.random.randint(-5, 5), np.random.randint(-5, 5))
 
         if cur_time - start_time > 300:
             print("Scenario test time out, " + str(cur_time - start_time))

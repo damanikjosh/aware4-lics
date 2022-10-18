@@ -190,24 +190,17 @@ def main(args=None):
 
     node = Node('px4_command_publisher')
 
-    vehicles = [Vehicle(node, i, 4. + 1. * i) for i in range(1, 10)]
+    vehicles = [Vehicle(node, i, 4. + 2. * i) for i in range(1, 10)]
 
     exit_value = 0
-    move_once = True
     # rclpy.spin(scenario_test)
     while rclpy.ok():
         rclpy.spin_once(node)
         # time.sleep(0.1)
         cur_time = time.time()
 
-        all_loiter = True
         for vehicle in vehicles:
-            if vehicle.mode != vehicle.MODE_LOITER:
-                all_loiter = False
-                break
-
-        if all_loiter:
-            for vehicle in vehicles:
+            if vehicle.mode == vehicle.MODE_LOITER:
                 vehicle.move(np.random.randint(-5, 5), np.random.randint(-5, 5))
 
         if cur_time - start_time > 300:

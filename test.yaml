@@ -45,6 +45,8 @@ rtps:
     send:    true
   - msg:     vehicle_command
     receive: true
+  - msg:     vehicle_command_ack
+    send:    true
   - msg:     vehicle_control_mode
     send:    true
   - msg:     vehicle_local_position_setpoint

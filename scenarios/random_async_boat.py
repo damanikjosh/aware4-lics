@@ -44,8 +44,13 @@ class Vehicle():
         self.command_sub = self.node.create_subscription(VehicleCommandAck, '/vehicle%d/out/VehicleCommandAck' % id, self.on_command_callback, 10)
         self.status_sub = self.node.create_subscription(VehicleStatus, '/vehicle%d/out/VehicleStatus' % id, self.on_status_callback, 10)
         self.gps_sub = self.node.create_subscription(VehicleGpsPosition, '/vehicle%d/out/VehicleGpsPosition' % id, self.on_gps_callback, 10)
+        self.odo_sub = self.node.create_subscription(VehicleOdometry, '/vehicle%d/out/VehicleOdometry' % id, self.on_odo_callback, 10)
+
+        self.set_mode(216)
+        self.change_speed(2.)
 
         self.init_pos = []
+        self.odo_counter = 0
 
     def on_home_callback(self, msg):
         # print(msg)
@@ -62,32 +67,26 @@ class Vehicle():
 
         if self.mode == self.MODE_STANDBY:
             if self.arming_state == 2:
-                self.mode = self.MODE_ARMED
+                self.mode = self.MODE_LOITER
             else:
                 self.arm()
-        if self.mode == self.MODE_ARMED:
-            if self.nav_state == 17:
-                self.mode = self.MODE_TAKEOFF
-            elif self.nav_state == 4 and abs(self.pos[2] - self.flight_alt) < 0.5:
-                self.mode = self.MODE_LOITER
-            else:
-                self.takeoff()
-        if self.mode == self.MODE_TAKEOFF:
-            if self.nav_state == 4:
-                self.mode = self.MODE_LOITER
-            elif self.nav_state == 5:
-                self.mode = self.MODE_STANDBY
         if self.mode == self.MODE_LOITER:
             if self.waypoint:
                 self.set_position(self.waypoint)
                 self.mode = self.MODE_MOVING
 
-        self.logger.info('nav_state: %d, arming_state: %d, mode: %d' % (self.nav_state, self.arming_state, self.mode))
+        self.logger.debug('nav_state: %d, arming_state: %d, mode: %d' % (self.nav_state, self.arming_state, self.mode))
         if self.mode == self.MODE_TAKEOFF:
             self.logger.info(msg)
 
     def move(self, x, y):
         self.waypoint = xy2latlon(x, y, self.flight_alt)
+
+    def on_odo_callback(self, msg):
+        self.odo_counter += 1
+        if self.odo_counter >= 100:
+            self.logger.info('%.4f, %.4f, %.4f' % (msg.x, msg.y, msg.z))
+            self.odo_counter = 0
 
     def on_gps_callback(self, msg):
         coor = [msg.lat * 1e-7, msg.lon * 1e-7, msg.alt * 1e-3]
@@ -106,7 +105,7 @@ class Vehicle():
                 self.mode = self.MODE_LOITER
                 self.waypoint = None
 
-        self.logger.debug('Received GPS coordinate: [%.4f, %.4f, %.4f]' % tuple(self.pos))
+        self.logger.debug('%.8f, %.8f, %.8f' % tuple(self.pos))
 
         # if self.mode == self.MODE_LOITER:
         #     if abs(self.pos[2] - self.flight_alt) > 0.5:
@@ -145,7 +144,6 @@ class Vehicle():
         takeoff_cmd.param1 = 0.0
         takeoff_cmd.param5 = pos[0]
         takeoff_cmd.param6 = pos[1]
-        takeoff_cmd.param7 = flight_alt
         takeoff_cmd.confirmation = True
         takeoff_cmd.from_external = True
         self.command.publish(takeoff_cmd)
@@ -184,31 +182,32 @@ class Vehicle():
         msg.from_external = True
         self.command.publish(msg)
 
+    def change_speed(self, speed):
+        self.logger.info("send CHANGE SPEED command")
+        msg = VehicleCommand()
+        msg.target_system = self.id
+        msg.command = 178
+        msg.param1 = 0.0
+        msg.param2 = float(speed)
+        msg.param3 = float(speed)
+        msg.confirmation = True
+        msg.from_external = True
+        self.command.publish(msg)
+
 def main(args=None):
     start_time = time.time()
     rclpy.init(args=args)
 
     node = Node('px4_command_publisher')
 
-    vehicles = [Vehicle(node, i, 4. + 1. * i) for i in range(1, 10)]
+    vehicles = [Vehicle(node, i, 0.) for i in range(1, 2)]
 
     exit_value = 0
-    move_once = True
     # rclpy.spin(scenario_test)
     while rclpy.ok():
         rclpy.spin_once(node)
         # time.sleep(0.1)
         cur_time = time.time()
-
-        all_loiter = True
-        for vehicle in vehicles:
-            if vehicle.mode != vehicle.MODE_LOITER:
-                all_loiter = False
-                break
-
-        if all_loiter:
-            for vehicle in vehicles:
-                vehicle.move(np.random.randint(-5, 5), np.random.randint(-5, 5))
 
         if cur_time - start_time > 300:
             print("Scenario test time out, " + str(cur_time - start_time))

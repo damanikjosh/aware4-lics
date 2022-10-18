@@ -1,17 +1,17 @@
 import numpy as np
 import rclpy
 from rclpy.node import Node
-from px4_msgs.msg import VehicleCommand, VehicleCommandAck, HomePosition, VehicleStatus, VehicleOdometry, VehicleGpsPosition
+from px4_msgs.msg import VehicleCommand, VehicleCommandAck, VehicleStatus, VehicleOdometry, VehicleGpsPosition
 import time
 import sys
 import math
 import logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 
 def xy2latlon(dx, dy, dz=None):
-    new_lat = 1. * 43.81678595809796 + (dy / 6378000) * (180 / math.pi)
-    new_lon = 1. * 28.581366799068558 + (dx / 6378000) * (180 / math.pi) / math.cos(43.81678595809796 * math.pi / 180)
+    new_lat = 1. * 47.333439 + (dy / 6378000) * (180 / math.pi)
+    new_lon = 1. * 8.547097 + (dx / 6378000) * (180 / math.pi) / math.cos(47.333439 * math.pi / 180)
     if dz is None:
         return new_lat, new_lon
     else:
@@ -20,11 +20,7 @@ def xy2latlon(dx, dy, dz=None):
 
 class Vehicle():
     MODE_INIT = 0
-    MODE_STANDBY = 1
-    MODE_ARMED = 2
-    MODE_TAKEOFF = 3
-    MODE_LOITER = 4
-    MODE_MOVING = 5
+    MODE_TAKEOFF = 1
 
     def __init__(self, node, id, flight_alt:float =10.):
         self.id = id
@@ -36,7 +32,7 @@ class Vehicle():
         self.nav_state = None
         self.arming_state = None
         self.vehicle_type = None
-        self.mode = self.MODE_INIT
+        self.mode = self.MODE_TAKEOFF
         self.waypoint = None
 
         self.flight_alt = flight_alt
@@ -45,73 +41,35 @@ class Vehicle():
         self.status_sub = self.node.create_subscription(VehicleStatus, '/vehicle%d/out/VehicleStatus' % id, self.on_status_callback, 10)
         self.gps_sub = self.node.create_subscription(VehicleGpsPosition, '/vehicle%d/out/VehicleGpsPosition' % id, self.on_gps_callback, 10)
 
+        self.set_mode(0)
+
         self.init_pos = []
 
     def on_home_callback(self, msg):
-        # print(msg)
+        self.logger.info(msg)
         pass
 
     def on_command_callback(self, msg):
         self.logger.info(msg)
-
 
     def on_status_callback(self, msg):
         self.nav_state = msg.nav_state
         self.arming_state = msg.arming_state
         self.vehicle_type = msg.vehicle_type
 
-        if self.mode == self.MODE_STANDBY:
-            if self.arming_state == 2:
-                self.mode = self.MODE_ARMED
-            else:
-                self.arm()
-        if self.mode == self.MODE_ARMED:
-            if self.nav_state == 17:
-                self.mode = self.MODE_TAKEOFF
-            elif self.nav_state == 4 and abs(self.pos[2] - self.flight_alt) < 0.5:
-                self.mode = self.MODE_LOITER
-            else:
+        if self.mode == self.MODE_TAKEOFF:
+            if self.nav_state != 17:
                 self.takeoff()
-        if self.mode == self.MODE_TAKEOFF:
-            if self.nav_state == 4:
-                self.mode = self.MODE_LOITER
-            elif self.nav_state == 5:
-                self.mode = self.MODE_STANDBY
-        if self.mode == self.MODE_LOITER:
-            if self.waypoint:
-                self.set_position(self.waypoint)
-                self.mode = self.MODE_MOVING
+            elif self.arming_state < 2:
+                self.arm()
 
-        self.logger.info('nav_state: %d, arming_state: %d, mode: %d' % (self.nav_state, self.arming_state, self.mode))
-        if self.mode == self.MODE_TAKEOFF:
-            self.logger.info(msg)
-
-    def move(self, x, y):
-        self.waypoint = xy2latlon(x, y, self.flight_alt)
+        self.logger.debug('nav_state: %d, arming_state: %d, mode: %d' % (self.nav_state, self.arming_state, self.mode))
 
     def on_gps_callback(self, msg):
         coor = [msg.lat * 1e-7, msg.lon * 1e-7, msg.alt * 1e-3]
-        if self.home is None:
-            self.init_pos.append(coor)
-            if len(self.init_pos) >= 10:
-                self.home = np.average(self.init_pos, axis=0).tolist()
-                del self.init_pos
-                self.mode = self.MODE_STANDBY
 
         self.pos = coor
-        if self.mode == self.MODE_MOVING:
-            dist = np.sqrt((self.waypoint[0] - self.pos[0]) ** 2 + (self.waypoint[1] - self.pos[1]) ** 2)
-            self.logger.info('Distance to waypoint: %.4f' % dist)
-            if dist < 1e-5:
-                self.mode = self.MODE_LOITER
-                self.waypoint = None
-
         self.logger.debug('Received GPS coordinate: [%.4f, %.4f, %.4f]' % tuple(self.pos))
-
-        # if self.mode == self.MODE_LOITER:
-        #     if abs(self.pos[2] - self.flight_alt) > 0.5:
-        #         self.set_position((self.pos[0], self.pos[1], self.flight_alt))
-        # pass
 
     def arm(self):
         self.logger.info("send ARM command")
@@ -133,19 +91,16 @@ class Vehicle():
         disarm_cmd.from_external = True
         self.command.publish(disarm_cmd)
 
-    def takeoff(self, pos=None, flight_alt=None):
-        if not pos:
-            pos = self.pos
-        if not flight_alt:
-            flight_alt = self.flight_alt
+    def takeoff(self):
+
         self.logger.info("send Takeoff command")
         takeoff_cmd = VehicleCommand()
         takeoff_cmd.target_system = self.id
         takeoff_cmd.command = 22
-        takeoff_cmd.param1 = 0.0
-        takeoff_cmd.param5 = pos[0]
-        takeoff_cmd.param6 = pos[1]
-        takeoff_cmd.param7 = flight_alt
+        takeoff_cmd.param1 = -1.0
+        # takeoff_cmd.param5 = pos[0]
+        # takeoff_cmd.param6 = pos[1]
+        takeoff_cmd.param7 = float(self.flight_alt)
         takeoff_cmd.confirmation = True
         takeoff_cmd.from_external = True
         self.command.publish(takeoff_cmd)
@@ -174,7 +129,7 @@ class Vehicle():
         move_cmd.from_external = True
         self.command.publish(move_cmd)
 
-    def set_mode(self, mode=0):
+    def set_mode(self, mode=192):
         self.logger.info("send SET MODE command")
         msg = VehicleCommand()
         msg.target_system = self.id
@@ -184,31 +139,44 @@ class Vehicle():
         msg.from_external = True
         self.command.publish(msg)
 
+    def mission_move(self, pos):
+        self.logger.info("send MOVE mission")
+        msg = VehicleCommand()
+        msg.target_system = self.id
+        msg.command = 16
+        # mission.param1 = float(hold_time)  # Hold time in decimal seconds. (ignored by fixed wing, time to stay at MISSION for rotary wing)
+        # mission.param2 = float(radius)     # Acceptance radius in meters (if the sphere with this radius is hit, the MISSION counts as reached)
+        msg.param3 = 0.0          # 0 to pass through the WP, if > 0 radius in meters to pass by WP. Positive value for clockwise orbit, negative value for counter-clockwise orbit. Allows trajectory control.
+        # mission.param4 = 0.0          # Desired yaw angle at MISSION (rotary wing)
+        msg.param5 = float(pos[0])     # Latitude
+        msg.param6 = float(pos[1])     # Longitude
+        msg.param7 = float(pos[2])     # Altitude
+        msg.confirmation = True
+        msg.from_external = True
+        self.command.publish(msg)
+
+    def start_mission(self):
+        self.logger.info("send START MISSION")
+        start_mission = VehicleCommand()
+        start_mission.command = 300
+        start_mission.confirmation = True
+        start_mission.from_external = True
+        self.command.publish(start_mission)
+
 def main(args=None):
     start_time = time.time()
     rclpy.init(args=args)
 
     node = Node('px4_command_publisher')
 
-    vehicles = [Vehicle(node, i, 4. + 1. * i) for i in range(1, 10)]
+    vehicles = [Vehicle(node, i, 10) for i in range(1, 2)]
 
     exit_value = 0
-    move_once = True
     # rclpy.spin(scenario_test)
     while rclpy.ok():
         rclpy.spin_once(node)
         # time.sleep(0.1)
         cur_time = time.time()
-
-        all_loiter = True
-        for vehicle in vehicles:
-            if vehicle.mode != vehicle.MODE_LOITER:
-                all_loiter = False
-                break
-
-        if all_loiter:
-            for vehicle in vehicles:
-                vehicle.move(np.random.randint(-5, 5), np.random.randint(-5, 5))
 
         if cur_time - start_time > 300:
             print("Scenario test time out, " + str(cur_time - start_time))
