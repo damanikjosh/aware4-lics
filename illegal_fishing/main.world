@@ -1,0 +1,604 @@
+<?xml version="1.0"?>
+<sdf version="1.5">
+  <world name="default">
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <include>
+      <uri>model://smooth</uri>
+      <pose>0 0 0 0 0 0</pose>
+    </include>
+    <include>
+          <name>rect area 1</name>
+          <uri>model://rect_1</uri>
+          <pose>93.14 -42.43 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 2</name>
+          <uri>model://rect_2</uri>
+          <pose>28.28 71.72 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 3</name>
+          <uri>model://rect_3</uri>
+          <pose>78.99 -56.57 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 4</name>
+          <uri>model://rect_1</uri>
+          <pose>78.99 -28.28 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 5</name>
+          <uri>model://rect_2</uri>
+          <pose>42.43 71.72 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 6</name>
+          <uri>model://rect_3</uri>
+          <pose>78.99 -70.71 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 7</name>
+          <uri>model://rect_1</uri>
+          <pose>78.99 -42.43 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 8</name>
+          <uri>model://rect_2</uri>
+          <pose>28.28 85.86 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 9</name>
+          <uri>model://rect_3</uri>
+          <pose>93.14 -70.71 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 10</name>
+          <uri>model://rect_1</uri>
+          <pose>93.14 -28.28 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 11</name>
+          <uri>model://rect_2</uri>
+          <pose>28.28 100.00 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 12</name>
+          <uri>model://rect_3</uri>
+          <pose>93.14 -84.85 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 13</name>
+          <uri>model://rect_1</uri>
+          <pose>93.14 -56.57 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 14</name>
+          <uri>model://rect_2</uri>
+          <pose>0.00 100.00 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 15</name>
+          <uri>model://rect_3</uri>
+          <pose>93.14 -98.99 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 16</name>
+          <uri>model://rect_1</uri>
+          <pose>64.85 -28.28 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 17</name>
+          <uri>model://rect_2</uri>
+          <pose>14.14 100.00 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 18</name>
+          <uri>model://rect_3</uri>
+          <pose>64.85 -84.85 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 19</name>
+          <uri>model://rect_1</uri>
+          <pose>64.85 -42.43 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 20</name>
+          <uri>model://rect_2</uri>
+          <pose>14.14 85.86 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 21</name>
+          <uri>model://rect_3</uri>
+          <pose>64.85 -98.99 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 22</name>
+          <uri>model://rect_1</uri>
+          <pose>36.57 -42.43 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 23</name>
+          <uri>model://rect_2</uri>
+          <pose>14.14 71.72 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 24</name>
+          <uri>model://rect_3</uri>
+          <pose>78.99 -98.99 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 25</name>
+          <uri>model://rect_1</uri>
+          <pose>50.71 -42.43 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 26</name>
+          <uri>model://rect_2</uri>
+          <pose>0.00 71.72 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 27</name>
+          <uri>model://rect_3</uri>
+          <pose>78.99 -84.85 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 28</name>
+          <uri>model://rect_1</uri>
+          <pose>56.57 1.01 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 29</name>
+          <uri>model://rect_2</uri>
+          <pose>0.00 85.86 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 30</name>
+          <uri>model://rect_3</uri>
+          <pose>50.71 -84.85 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 31</name>
+          <uri>model://rect_1</uri>
+          <pose>56.57 15.15 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 32</name>
+          <uri>model://rect_2</uri>
+          <pose>0.00 57.57 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 33</name>
+          <uri>model://rect_3</uri>
+          <pose>64.85 -70.71 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 34</name>
+          <uri>model://rect_1</uri>
+          <pose>70.71 1.01 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 35</name>
+          <uri>model://rect_2</uri>
+          <pose>0.00 43.43 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 36</name>
+          <uri>model://rect_3</uri>
+          <pose>36.57 -84.85 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 37</name>
+          <uri>model://rect_1</uri>
+          <pose>70.71 29.29 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 38</name>
+          <uri>model://rect_2</uri>
+          <pose>14.14 57.57 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 39</name>
+          <uri>model://rect_3</uri>
+          <pose>36.57 -98.99 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 40</name>
+          <uri>model://rect_1</uri>
+          <pose>70.71 15.15 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 41</name>
+          <uri>model://rect_2</uri>
+          <pose>14.14 43.43 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 42</name>
+          <uri>model://rect_3</uri>
+          <pose>50.71 -98.99 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 43</name>
+          <uri>model://rect_1</uri>
+          <pose>84.85 15.15 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 44</name>
+          <uri>model://rect_2</uri>
+          <pose>28.28 43.43 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 45</name>
+          <uri>model://rect_3</uri>
+          <pose>36.57 -70.71 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 46</name>
+          <uri>model://rect_1</uri>
+          <pose>84.85 29.29 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 47</name>
+          <uri>model://rect_2</uri>
+          <pose>28.28 57.57 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 48</name>
+          <uri>model://rect_3</uri>
+          <pose>22.43 -70.71 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 49</name>
+          <uri>model://rect_1</uri>
+          <pose>70.71 57.57 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 50</name>
+          <uri>model://rect_2</uri>
+          <pose>14.14 29.29 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 51</name>
+          <uri>model://rect_3</uri>
+          <pose>22.43 -84.85 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 52</name>
+          <uri>model://rect_1</uri>
+          <pose>70.71 43.43 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 53</name>
+          <uri>model://rect_2</uri>
+          <pose>28.28 29.29 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 54</name>
+          <uri>model://rect_3</uri>
+          <pose>22.43 -98.99 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 55</name>
+          <uri>model://rect_1</uri>
+          <pose>84.85 43.43 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 56</name>
+          <uri>model://rect_2</uri>
+          <pose>0.00 29.29 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 57</name>
+          <uri>model://rect_3</uri>
+          <pose>8.28 -84.85 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 58</name>
+          <uri>model://rect_1</uri>
+          <pose>56.57 29.29 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 59</name>
+          <uri>model://rect_2</uri>
+          <pose>14.14 15.15 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 60</name>
+          <uri>model://rect_3</uri>
+          <pose>8.28 -98.99 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 61</name>
+          <uri>model://rect_1</uri>
+          <pose>56.57 57.57 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 62</name>
+          <uri>model://rect_2</uri>
+          <pose>28.28 15.15 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 63</name>
+          <uri>model://rect_3</uri>
+          <pose>-20.00 -84.85 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 64</name>
+          <uri>model://rect_1</uri>
+          <pose>56.57 43.43 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 65</name>
+          <uri>model://rect_2</uri>
+          <pose>36.57 -14.14 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 66</name>
+          <uri>model://rect_3</uri>
+          <pose>-20.00 -98.99 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 67</name>
+          <uri>model://rect_1</uri>
+          <pose>70.71 71.72 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 68</name>
+          <uri>model://rect_2</uri>
+          <pose>8.28 -28.28 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 69</name>
+          <uri>model://rect_3</uri>
+          <pose>-5.86 -98.99 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 70</name>
+          <uri>model://rect_1</uri>
+          <pose>70.71 85.86 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 71</name>
+          <uri>model://rect_2</uri>
+          <pose>22.43 -28.28 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 72</name>
+          <uri>model://rect_3</uri>
+          <pose>-5.86 -84.85 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 73</name>
+          <uri>model://rect_1</uri>
+          <pose>98.99 85.86 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 74</name>
+          <uri>model://rect_2</uri>
+          <pose>36.57 -28.28 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 75</name>
+          <uri>model://rect_3</uri>
+          <pose>-20.00 -70.71 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 76</name>
+          <uri>model://rect_1</uri>
+          <pose>98.99 100.00 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 77</name>
+          <uri>model://rect_2</uri>
+          <pose>50.71 -14.14 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 78</name>
+          <uri>model://rect_3</uri>
+          <pose>-5.86 -70.71 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 79</name>
+          <uri>model://rect_1</uri>
+          <pose>84.85 57.57 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 80</name>
+          <uri>model://rect_2</uri>
+          <pose>50.71 -28.28 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 81</name>
+          <uri>model://rect_3</uri>
+          <pose>8.28 -70.71 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 82</name>
+          <uri>model://rect_1</uri>
+          <pose>84.85 71.72 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 83</name>
+          <uri>model://rect_2</uri>
+          <pose>64.85 -14.14 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 84</name>
+          <uri>model://rect_3</uri>
+          <pose>-5.86 -56.57 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 85</name>
+          <uri>model://rect_1</uri>
+          <pose>84.85 85.86 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 86</name>
+          <uri>model://rect_2</uri>
+          <pose>42.43 43.43 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 87</name>
+          <uri>model://rect_3</uri>
+          <pose>-20.00 -42.43 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 88</name>
+          <uri>model://rect_1</uri>
+          <pose>98.99 71.72 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 89</name>
+          <uri>model://rect_2</uri>
+          <pose>42.43 29.29 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 90</name>
+          <uri>model://rect_3</uri>
+          <pose>-20.00 -56.57 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 91</name>
+          <uri>model://rect_1</uri>
+          <pose>98.99 57.57 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 92</name>
+          <uri>model://rect_2</uri>
+          <pose>42.43 15.15 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 93</name>
+          <uri>model://rect_3</uri>
+          <pose>-5.86 -42.43 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 94</name>
+          <uri>model://rect_1</uri>
+          <pose>98.99 43.43 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 95</name>
+          <uri>model://rect_2</uri>
+          <pose>42.43 57.57 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 96</name>
+          <uri>model://rect_3</uri>
+          <pose>8.28 -42.43 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 97</name>
+          <uri>model://rect_1</uri>
+          <pose>98.99 29.29 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 98</name>
+          <uri>model://rect_2</uri>
+          <pose>56.57 71.72 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 99</name>
+          <uri>model://rect_3</uri>
+          <pose>8.28 -56.57 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 100</name>
+          <uri>model://rect_1</uri>
+          <pose>98.99 15.15 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 101</name>
+          <uri>model://rect_2</uri>
+          <pose>70.71 100.00 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 102</name>
+          <uri>model://rect_3</uri>
+          <pose>22.43 -56.57 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 103</name>
+          <uri>model://rect_1</uri>
+          <pose>98.99 1.01 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 104</name>
+          <uri>model://rect_2</uri>
+          <pose>84.85 100.00 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 105</name>
+          <uri>model://rect_3</uri>
+          <pose>22.43 -42.43 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 106</name>
+          <uri>model://rect_1</uri>
+          <pose>78.99 -14.14 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 107</name>
+          <uri>model://rect_2</uri>
+          <pose>42.43 85.86 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 108</name>
+          <uri>model://rect_3</uri>
+          <pose>36.57 -56.57 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 109</name>
+          <uri>model://rect_1</uri>
+          <pose>84.85 -13.14 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 110</name>
+          <uri>model://rect_2</uri>
+          <pose>42.43 100.00 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 111</name>
+          <uri>model://rect_3</uri>
+          <pose>50.71 -56.57 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 112</name>
+          <uri>model://rect_1</uri>
+          <pose>84.85 1.01 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 113</name>
+          <uri>model://rect_2</uri>
+          <pose>56.57 100.00 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 114</name>
+          <uri>model://rect_3</uri>
+          <pose>50.71 -70.71 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 115</name>
+          <uri>model://rect_1</uri>
+          <pose>98.99 -13.14 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 116</name>
+          <uri>model://rect_2</uri>
+          <pose>56.57 85.86 4 0 0 0</pose>
+        </include>
+        <include>
+          <name>rect area 117</name>
+          <uri>model://rect_3</uri>
+          <pose>64.85 -56.57 4 0 0 0</pose>
+        </include>
+        <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>43.81678595809796</latitude_deg>
+      <longitude_deg>28.581366799068558</longitude_deg>
+      <!-- 43.81678595809796, 28.581366799068558 -->
+      <elevation>1.7</elevation>
+    </spherical_coordinates>
+  </world>
+</sdf>

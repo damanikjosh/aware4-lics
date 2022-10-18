@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <model name="model">
+      <pose>0 0 0  0 0 0</pose>
+      <static>true</static>
+      <link name="body">
+        <collision name="seabed">
+          <pose>0 0 -5.5 0 0 -1.57079632679</pose>
+          <geometry>
+            <mesh><uri>model://smooth/meshes/av4vai_world.dae</uri></mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://smooth/materials/scripts/sand.material</uri>
+              <name>UUVSimulator/SandAndStones</name>
+            </script>
+          </material>
+        </collision>
+
+        <visual name="seabed">
+          <pose>0 0 -5.5 0 0 -1.57079632679</pose>
+          <geometry>
+            <mesh><uri>model://smooth/meshes/av4vai_world.dae</uri></mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://smooth/materials/scripts/sand.material</uri>
+              <name>UUVSimulator/SandAndStones</name>
+            </script>
+          </material>
+        </visual>
+        <visual name="surface">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>200 200 .1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://smooth/materials/scripts/water.material</uri>
+              <name>UUVSimulator/StaticWater</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+</sdf>
