@@ -2,8 +2,6 @@
 
 A loader script of [Aware4 Docker](https://hub.docker.com/r/aware4docker/qtr-px4-ros2-docker-foxy) simulator.
 
----
-
 ## Installation
 
 Before running the simulation, make sure you have NVIDIA driver, Docker, and CUDA container toolkit.
