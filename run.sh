@@ -25,7 +25,7 @@ docker run --rm\
     -v $(pwd)/startup.sh:/root/startup.sh\
     -v $(pwd)/$1/:/root/scenario\
     -v $(pwd)/urtps_bridge_topics.yaml:/root/PX4-Autopilot/msg/tools/urtps_bridge_topics.yaml\
-    joshuajdmk/aware4-lics:v1.4\
+    joshuajdmk/aware4-lics:v1.5\
     /root/startup.sh
 
 pkill -9 QGroundControl
