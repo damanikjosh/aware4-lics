@@ -1,4 +1,4 @@
 id_base,Location_X,Location_Y,isSea_base,isAir_base,isLand_base
 1,20,30,0,1,0
 2,80,20,0,1,0
-3,80,40,1,0,0
+3,85,40,1,0,0

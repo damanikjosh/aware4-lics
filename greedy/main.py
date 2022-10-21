@@ -7,9 +7,11 @@ import sys
 import math
 import logging
 
+MIN_DIST = 3e-5
+
 from scipy.spatial import KDTree
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 def xy2latlon(dx, dy, dz=None):
     new_lat = 1. * 43.81678595809796 + ((dy * 2 - 100) / 6378000) * (180 / math.pi)
@@ -27,20 +29,22 @@ class Vehicle():
     MODE_TAKEOFF = 3
     MODE_READY = 4
     MODE_MOVING = 5
+    MODE_MISSION = 6
 
     TYPE_AIR = 1
     TYPE_LAND = 2
     TYPE_SEA = 3
 
-    def __init__(self, node, id, type, flight_alt=None):
+    def __init__(self, node, id, type, tasks, flight_alt=None):
         self.id = id
         self.type = type
+        self.tasks = tasks
         self.node = node
         if flight_alt is None:
-            flight_alt = 4. + id if type == self.TYPE_AIR else 0.
+            flight_alt = 4. if type == self.TYPE_AIR else 0.
         self.flight_alt = flight_alt
 
-        self.pos = None
+        self.location = None
         self.home = None
         self.logger = logging.getLogger('agent%d' % id)
         self.ready = False
@@ -49,6 +53,7 @@ class Vehicle():
         self.vehicle_type = None
         self.mode = self.MODE_INIT
         self.waypoint = None
+        self.mission = None
 
         self.flight_alt = flight_alt
         self.command = self.node.create_publisher(VehicleCommand, '/vehicle%d/in/VehicleCommand' % id, 10)
@@ -69,18 +74,19 @@ class Vehicle():
         self.arming_state = msg.arming_state
         self.vehicle_type = msg.vehicle_type
 
-        if self.mode == self.MODE_STANDBY and self.nav_state == 4:
+        if self.mode == self.MODE_STANDBY:
             if self.arming_state == 2:
                 if self.type == self.TYPE_AIR:
                     self.mode = self.MODE_PREFLIGHT
                 else:
                     self.mode = self.MODE_READY
             else:
+                time.sleep(1)
                 self.arm()
         if self.mode == self.MODE_PREFLIGHT:
             if self.nav_state == 17:
                 self.mode = self.MODE_TAKEOFF
-            elif self.nav_state == 4 and abs(self.pos[2] - self.flight_alt) < 0.5:
+            elif self.nav_state == 4 and abs(self.location[2] - self.flight_alt) < 0.5:
                 self.mode = self.MODE_READY
             else:
                 self.takeoff()
@@ -93,8 +99,10 @@ class Vehicle():
             if self.waypoint:
                 self.set_position(self.waypoint)
                 self.mode = self.MODE_MOVING
+        if self.mode > self.MODE_STANDBY and self.arming_state == 1:
+            self.mode = self.MODE_STANDBY
 
-        self.logger.debug('nav_state: %d, arming_state: %d, mode: %d' % (self.nav_state, self.arming_state, self.mode))
+        self.logger.info('nav_state: %d, arming_state: %d, mode: %d' % (self.nav_state, self.arming_state, self.mode))
 
     def move(self, x, y):
         self.waypoint = xy2latlon(x, y, self.flight_alt)
@@ -108,19 +116,19 @@ class Vehicle():
                 del self.init_pos
                 self.mode = self.MODE_STANDBY
 
-        self.pos = coor
+        self.location = coor
         if self.mode == self.MODE_MOVING:
-            dist = np.sqrt((self.waypoint[0] - self.pos[0]) ** 2 + (self.waypoint[1] - self.pos[1]) ** 2)
+            dist = np.sqrt((self.waypoint[0] - self.location[0]) ** 2 + (self.waypoint[1] - self.location[1]) ** 2)
             self.logger.debug('Distance to waypoint: %.4f' % dist)
-            if dist < 1e-5:
+            if dist < MIN_DIST:
                 self.mode = self.MODE_READY
                 self.waypoint = None
 
-        self.logger.debug('Received GPS coordinate: [%.4f, %.4f, %.4f]' % tuple(self.pos))
+        self.logger.debug('Received GPS coordinate: [%.4f, %.4f, %.4f]' % tuple(self.location))
 
         # if self.mode == self.MODE_READY:
-        #     if abs(self.pos[2] - self.flight_alt) > 0.5:
-        #         self.set_position((self.pos[0], self.pos[1], self.flight_alt))
+        #     if abs(self.location[2] - self.flight_alt) > 0.5:
+        #         self.set_position((self.location[0], self.location[1], self.flight_alt))
         # pass
 
     def arm(self):
@@ -145,7 +153,7 @@ class Vehicle():
 
     def takeoff(self, pos=None, flight_alt=None):
         if not pos:
-            pos = self.pos
+            pos = self.location
         if not flight_alt:
             flight_alt = self.flight_alt
         self.logger.info("send Takeoff command")
@@ -185,9 +193,14 @@ class Vehicle():
         move_cmd.from_external = True
         self.command.publish(move_cmd)
 
-    # def find_task(self, tasks):
-    #     if tasks:
-    #         tree =
+    def find_task(self):
+        available_tasks = [task for task in self.tasks if not task.done and not task.assigned]
+        if available_tasks:
+            tree = KDTree([xy2latlon(task.location[0], task.location[1]) for task in available_tasks])
+            _, idx = tree.query([self.location[0], self.location[1]])
+            return available_tasks[idx].id
+        return None
+
 
     # def set_mode(self, mode=216):
     #     self.logger.info("send SET MODE command")
@@ -201,38 +214,89 @@ class Vehicle():
 
 
 class Task:
-    def __init__(self, location, types):
+    def __init__(self, id, location, types):
+        self.id = id
         self.location = location
         self.types = types
         self.assigned = False
         self.done = False
 
 
+def find_task(tasks_location, location):
+    tree = KDTree(tasks_location)
+    _, idx = tree.query([location[0], location[1]])
+    return idx
+
+
 def main(args=None):
-    from data import bases, agents, search_nodes
+    from data import bases, agents, search_nodes, enemy_nodes
 
     start_time = time.time()
 
     rclpy.init(args=args)
     px4_node = Node('px4_command_publisher')
 
-    vehicles = []
-    tasks = []
+    tasks = dict()
+    uavs = []
+    usvs = []
+
+    i = 0
+    for node in search_nodes:
+        tasks[node.id] = Task(node.id, xy2latlon(node.location[0], node.location[1]), [Vehicle.TYPE_AIR])
+        i += 1
+    # for node in enemy_nodes:
+    #     tasks[1000 + node.id] = Task(1000 + node.id, xy2latlon(node.location[0], node.location[1]), [Vehicle.TYPE_SEA])
 
     for agent in agents:
-        if agent.id <= 6:
-            vehicles.append(Vehicle(px4_node, agent.id, agent.type))
-
-    for node in search_nodes:
-        tasks.append(Task(node.location, node.types))
+        if agent.type == Vehicle.TYPE_AIR:
+            uavs.append(Vehicle(px4_node, agent.id, agent.type, tasks))
+        elif agent.type == Vehicle.TYPE_SEA:
+            usvs.append(Vehicle(px4_node, agent.id, agent.type, tasks))
 
     exit_value = 0
-    waypoints_ready = True
+    assignment_ready = True
 
     while rclpy.ok():
-        available_tasks = [task for task in tasks if (not task.assigned and not task.done)]
         rclpy.spin_once(px4_node)
         cur_time = time.time()
+
+        uavs_ready = True
+        for uav in uavs:
+            if uav.mode != Vehicle.MODE_READY:
+                uavs_ready = False
+            if uav.mode >= Vehicle.MODE_READY:
+                for node in enemy_nodes:
+                    enemy_latlon = xy2latlon(node.location[0], node.location[1])
+                    dist = np.sqrt((uav.location[0] - enemy_latlon[0]) ** 2 + (uav.location[1] - enemy_latlon[1]) ** 2)
+                    if dist < MIN_DIST:
+                        uav.logger.info('FOUND ILLEGAL BOAT')
+                        if (1000 + node.id) not in tasks:
+                            tasks[1000 + node.id] = Task(1000 + node.id, xy2latlon(node.location[0], node.location[1]), [Vehicle.TYPE_SEA])
+
+        if uavs_ready:
+            if assignment_ready:
+                available_tasks = [task for task in tasks.values() if (Vehicle.TYPE_AIR in task.types) and (not task.done) and (not task.assigned)]
+                for uav in uavs:
+                    if available_tasks and uav.waypoint is None:
+                        i = find_task([[task.location[0], task.location[1]] for task in available_tasks], uav.location)
+                        min_task = available_tasks[i]
+                        uav.waypoint = [min_task.location[0], min_task.location[1], uav.flight_alt]
+                        min_task.assigned = True
+                        del available_tasks[i]
+
+                available_tasks = [task for task in tasks.values() if (Vehicle.TYPE_SEA in task.types) and (not task.done) and (not task.assigned)]
+                for usv in usvs:
+                    if available_tasks and usv.waypoint is None:
+                        i = find_task([[task.location[0], task.location[1]] for task in available_tasks], usv.location)
+                        min_task = available_tasks[i]
+                        usv.waypoint = [min_task.location[0], min_task.location[1], usv.flight_alt]
+                        min_task.assigned = True
+                        del available_tasks[i]
+            assignment_ready = False
+        else:
+            assignment_ready = True
+
+
 
     rclpy.shutdown()
 

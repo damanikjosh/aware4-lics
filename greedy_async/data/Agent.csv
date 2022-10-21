@@ -1,0 +1,9 @@
+id_agent,Agent_Type,Agent_BaseDeployment,Agent_Gear1,Agent_Gear2,Agent_Gear3,Agent_Gear4,Location_X,Location_Y,Speed,EnergyConsumption,RemainEnergy
+1,1,1,1,0,0,0,20,30,3,1,100
+2,1,1,1,0,0,0,20,30,3,1,100
+3,1,1,1,0,0,0,20,30,3,1,100
+4,1,2,1,0,0,0,80,20,3,1,100
+5,1,2,1,0,0,0,80,20,3,1,100
+6,1,2,1,0,0,0,80,20,3,1,100
+7,3,3,1,0,1,0,90,40,2,6,100
+8,3,3,1,0,1,0,90,40,2,6,100

@@ -107,8 +107,8 @@ class Vehicle():
         self.logger.debug('Received GPS coordinate: [%.4f, %.4f, %.4f]' % tuple(self.pos))
 
         # if self.mode == self.MODE_READY:
-        #     if abs(self.pos[2] - self.flight_alt) > 0.5:
-        #         self.set_position((self.pos[0], self.pos[1], self.flight_alt))
+        #     if abs(self.location[2] - self.flight_alt) > 0.5:
+        #         self.set_position((self.location[0], self.location[1], self.flight_alt))
         # pass
 
     def arm(self):
