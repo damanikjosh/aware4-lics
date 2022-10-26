@@ -7,7 +7,7 @@
         <collision name="seabed">
           <pose>0 0 -5.5 0 0 0</pose>
           <geometry>
-            <mesh><uri>model://smooth/meshes/av4vai_world.dae</uri></mesh>
+            <mesh><uri>model://smooth/meshes/av4vai_world_scaled.dae</uri></mesh>
           </geometry>
           <material>
             <script>
@@ -20,7 +20,7 @@
         <visual name="seabed">
           <pose>0 0 -5.5 0 0 0</pose>
           <geometry>
-            <mesh><uri>model://smooth/meshes/av4vai_world.dae</uri></mesh>
+            <mesh><uri>model://smooth/meshes/av4vai_world_scaled.dae</uri></mesh>
           </geometry>
           <material>
             <script>
@@ -33,7 +33,7 @@
           <pose>0 0 0 0 0 0</pose>
           <geometry>
             <box>
-              <size>200 200 .1</size>
+              <size>1000 1000 .1</size>
             </box>
           </geometry>
           <material>

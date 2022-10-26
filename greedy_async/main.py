@@ -14,8 +14,8 @@ from scipy.spatial import KDTree
 logging.basicConfig(level=logging.INFO)
 
 def xy2latlon(dx, dy, dz=None):
-    new_lat = 1. * 43.81678595809796 + ((dy * 2 - 100) / 6378000) * (180 / math.pi)
-    new_lon = 1. * 28.581366799068558 + ((dx * 2 - 100) / 6378000) * (180 / math.pi) / math.cos(43.81678595809796 * math.pi / 180)
+    new_lat = 1. * 43.81678595809796 + ((dy * 10 - 500) / 6378000) * (180 / math.pi)
+    new_lon = 1. * 28.581366799068558 + ((dx * 10 - 500) / 6378000) * (180 / math.pi) / math.cos(43.81678595809796 * math.pi / 180)
     if dz is None:
         return new_lat, new_lon
     else:
@@ -29,24 +29,26 @@ class Vehicle():
     MODE_TAKEOFF = 3
     MODE_READY = 4
     MODE_MOVING = 5
-    MODE_PURSUIT = 6
+    MODE_RETURN = 6
 
     TYPE_AIR = 1
     TYPE_LAND = 2
     TYPE_SEA = 3
     TYPE_ENEMY_SEA = 4
 
-    def __init__(self, node, id, type, tasks, flight_alt=None):
+    def __init__(self, node, id, type, tasks, enemies, flight_alt=None):
         self.id = id
         self.type = type
         self.tasks = tasks
+        self.enemies = enemies
+
         self.node = node
         if flight_alt is None:
             flight_alt = 4. + id if type == self.TYPE_AIR else 0.
         self.flight_alt = flight_alt
 
         if type == self.TYPE_SEA or type == self.TYPE_ENEMY_SEA:
-            self.min_dist = 6e-5
+            self.min_dist = 9e-5
         else:
             self.min_dist = 3e-5
 
@@ -69,6 +71,9 @@ class Vehicle():
         self.command_sub = self.node.create_subscription(VehicleCommandAck, '/vehicle%d/out/VehicleCommandAck' % id, self.on_command_callback, 10)
         self.status_sub = self.node.create_subscription(VehicleStatus, '/vehicle%d/out/VehicleStatus' % id, self.on_status_callback, 10)
         self.gps_sub = self.node.create_subscription(VehicleGpsPosition, '/vehicle%d/out/VehicleGpsPosition' % id, self.on_gps_callback, 10)
+
+        if self.type == self.TYPE_SEA:
+            self.change_speed(2.0)
 
         self.init_pos = []
 
@@ -93,7 +98,6 @@ class Vehicle():
                     self.mode = self.MODE_READY
             else:
                 self.arm()
-                time.sleep(1)
         elif self.mode == self.MODE_PREFLIGHT:
             if self.nav_state == 17:
                 self.mode = self.MODE_TAKEOFF
@@ -121,18 +125,33 @@ class Vehicle():
                 self.set_position(self.target)
                 self.mode = self.MODE_MOVING
             elif self.in_mission:
+                find_new_task = True
                 if self.curr_task:
-                    self.curr_task.done = True
+                    post_reqs_done = True
+                    for post_req in self.curr_task.post_reqs:
+                        if post_req.done == False:
+                            post_reqs_done = False
+                    if post_reqs_done:
+                        self.curr_task.done = True
+                        for task in self.curr_task.post_avail:
+                            task.available = True
+                        find_new_task = True
+                    else:
+                        find_new_task = False
                     # if 2000 <= self.curr_task.id < 3000 and self.curr_task.vehicle_id not in self.tasks:
                     #     self.tasks[self.curr_task.vehicle_id] = Task(self.curr_task.vehicle_id, [self.curr_task.dest], [self.TYPE_ENEMY_SEA])
-
-                new_task = self.find_task()
-                if new_task is not None:
-                    self.curr_task = new_task
-                    self.waypoints += new_task.locations
-                    new_task.assigned = True
-                else:
-                    self.curr_task = None
+                if find_new_task:
+                    new_task = self.find_task()
+                    if new_task is not None:
+                        self.curr_task = new_task
+                        self.waypoints += new_task.locations
+                        new_task.assigned = True
+                    else:
+                        self.curr_task = None
+                        if self.type == self.TYPE_AIR:
+                            self.target = [self.home[0], self.home[1], self.flight_alt]
+                            self.set_position(self.target)
+                            self.mode = self.MODE_MOVING
 
         self.logger.info('nav_state: %d, arming_state: %d, mode: %d' % (self.nav_state, self.arming_state, self.mode))
 
@@ -146,12 +165,23 @@ class Vehicle():
                 self.mode = self.MODE_STANDBY
 
         self.location = coor
+        for node in self.enemies:
+            enemy_latlon = xy2latlon(node.location[0], node.location[1])
+            dist = np.sqrt((self.location[0] - enemy_latlon[0]) ** 2 + (self.location[1] - enemy_latlon[1]) ** 2)
+            if dist < self.min_dist:
+                if self.curr_task and (not self.tasks[2000 + node.id].available):
+                    self.logger.info('FOUND ILLEGAL BOAT')
+                    self.tasks[2000 + node.id].available = True
+                    self.curr_task.post_reqs = [self.tasks[2000 + node.id]]
+
         if self.mode == self.MODE_MOVING:
             dist = np.sqrt((self.target[0] - self.location[0]) ** 2 + (self.target[1] - self.location[1]) ** 2)
             self.logger.debug('Distance to waypoint: %.4f' % dist)
             if dist < self.min_dist:
                 self.mode = self.MODE_READY
                 self.target = None
+
+
 
         self.logger.debug('Received GPS coordinate: [%.4f, %.4f, %.4f]' % tuple(self.location))
 
@@ -164,6 +194,15 @@ class Vehicle():
         arm_cmd.confirmation = True
         arm_cmd.from_external = True
         self.command.publish(arm_cmd)
+
+    def return_to_base(self):
+        self.logger.info("send RETURN command")
+        return_cmd = VehicleCommand()
+        return_cmd.target_system = self.id
+        return_cmd.command = 20
+        return_cmd.confirmation = True
+        return_cmd.from_external = True
+        self.command.publish(return_cmd)
 
     def disarm(self):
         self.logger.info("send DISARM command")
@@ -217,8 +256,20 @@ class Vehicle():
         move_cmd.from_external = True
         self.command.publish(move_cmd)
 
+    def change_speed(self, speed):
+        self.logger.info("send CHANGE SPEED command")
+        speed_cmd = VehicleCommand()
+        speed_cmd.target_system = self.id
+        speed_cmd.command = 178
+        speed_cmd.param1 = 1.0
+        speed_cmd.param2 = float(speed)
+        speed_cmd.param3 = -1.0
+        speed_cmd.confirmation = True
+        speed_cmd.from_external = True
+        self.command.publish(speed_cmd)
+
     def find_task(self):
-        available_tasks = [task for task in self.tasks.values() if (not task.done) and (not task.assigned) and ((self.type in task.types) or (task.id == self.id))]
+        available_tasks = [task for task in self.tasks.values() if task.available and (not task.done) and (not task.assigned) and ((self.type in task.types) or (task.id == self.id))]
         if available_tasks:
             tree = KDTree([[task.locations[0][0], task.locations[0][1]] for task in available_tasks])
             _, idx = tree.query([self.location[0], self.location[1]])
@@ -226,24 +277,16 @@ class Vehicle():
         return None
 
 
-    # def set_mode(self, mode=216):
-    #     self.logger.info("send SET MODE command")
-    #     msg = VehicleCommand()
-    #     msg.target_system = self.id
-    #     msg.command = 176
-    #     msg.param1 = float(mode)
-    #     msg.confirmation = True
-    #     msg.from_external = True
-    #     self.command.publish(msg)
-
-
 class Task:
-    def __init__(self, id, locations, types):
+    def __init__(self, id, locations, types, post_reqs=[], post_avail=[]):
         self.id = id
         self.locations = locations
         self.types = types
+        self.available = False
         self.assigned = False
         self.done = False
+        self.post_reqs = post_reqs
+        self.post_avail = post_avail
 
 
 def find_task(tasks_location, location):
@@ -264,15 +307,27 @@ def main(args=None):
     vehicles = []
 
     i = 0
+
+
+
     for node in search_nodes:
         tasks[1000 + node.id] = Task(1000 + node.id, [xy2latlon(node.location[0], node.location[1])], [Vehicle.TYPE_AIR])
+        tasks[1000 + node.id].available = True
         i += 1
+
+    for node in enemy_nodes:
+        tasks[2000 + node.id] = Task(2000 + node.id, [xy2latlon(node.location[0], node.location[1])], [Vehicle.TYPE_SEA])
+        tasks[3000 + node.id] = Task(2000 + node.id, [xy2latlon(node.location[0], node.location[1]),
+                                                           xy2latlon(node.dest[0], node.dest[1])], [Vehicle.TYPE_SEA])
+        tasks[2000 + node.id].post_avail = [tasks[3000 + node.id],]
+        # tasks[2000 + node.id].available = True
+
 
     for agent in agents:
         if agent.type == Vehicle.TYPE_AIR:
-            vehicles.append(Vehicle(px4_node, agent.id, agent.type, tasks))
+            vehicles.append(Vehicle(px4_node, agent.id, agent.type, tasks, enemy_nodes))
         elif agent.type == Vehicle.TYPE_SEA:
-            vehicles.append(Vehicle(px4_node, agent.id, agent.type, tasks))
+            vehicles.append(Vehicle(px4_node, agent.id, agent.type, tasks, enemy_nodes))
 
     # for _ in enemy_nodes:
     #     vehicles.append(Vehicle(px4_node, vehicles[-1].id + 1, Vehicle.TYPE_ENEMY_SEA, tasks))
@@ -288,14 +343,6 @@ def main(args=None):
         for vehicle in vehicles:
             if vehicle.mode != Vehicle.MODE_READY:
                 all_ready = False
-            if vehicle.type == vehicle.TYPE_AIR and vehicle.mode >= Vehicle.MODE_READY:
-                for node in enemy_nodes:
-                    enemy_latlon = xy2latlon(node.location[0], node.location[1])
-                    dist = np.sqrt((vehicle.location[0] - enemy_latlon[0]) ** 2 + (vehicle.location[1] - enemy_latlon[1]) ** 2)
-                    if dist < MIN_DIST:
-                        if (2000 + node.id) not in tasks:
-                            vehicle.logger.info('FOUND ILLEGAL BOAT')
-                            tasks[2000 + node.id] = Task(2000 + node.id, [xy2latlon(node.location[0], node.location[1]), xy2latlon(node.dest[0], node.dest[1])], [Vehicle.TYPE_SEA])
 
         if all_ready:
             for vehicle in vehicles:

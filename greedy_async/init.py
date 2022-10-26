@@ -3,6 +3,10 @@ from data import agents, search_nodes, enemy_nodes, dest_nodes
 import os
 curr_path = os.path.dirname(os.path.abspath(__file__))
 
+SCALER = 10.
+WIDTH = 2.
+DIST = 2.
+
 bases = dict()
 means = dict()
 
@@ -22,16 +26,15 @@ for i, base_agents in bases.items():
     for j, agent in enumerate(base_agents):
         if agent.type == 1:
             file.write('iris:')
-            file.write('%.2f:%.2f:5:A\n' % (agent.location[0] * 2 - 100 + (1. * j - means[i]) * 5.0, agent.location[1] * 2 - 100))
+            file.write('%.2f:%.2f:5:A\n' % (SCALER * (agent.location[0] - 50 + (1. * j - means[i]) * DIST), SCALER * (agent.location[1] - 50)))
         elif agent.type == 3:
             file.write('boat:')
-            file.write('%.2f:%.2f:5:A\n' % (agent.location[0] * 2 - 100, agent.location[1] * 2 - 100 + (1. * j - means[i]) * 5.0))
+            file.write('%.2f:%.2f:5:A\n' % (SCALER * (agent.location[0] - 50), SCALER * (agent.location[1] - 50 + (1. * j - means[i]) * DIST)))
 
 
 # for node in enemy_nodes:
 #     file.write('boat:%.2f:%.2f:5:B\n' % (node.location[0] * 2 - 100, node.location[1] * 2 - 100))
 # file.close()
-
 
 
 file = open(curr_path + '/main.world', 'w')
@@ -52,9 +55,9 @@ for node in search_nodes:
     file.write('''    <include>
       <name>rect red %d</name>
       <uri>model://rect_red</uri>
-      <pose>%.2f %.2f 2 0 0 0</pose>
+      <pose>%.2f %.2f 4 0 0 0</pose>
     </include>
-''' % (i, node.location[0] * 2 - 100, node.location[1] * 2 - 100))
+''' % (i, SCALER * (node.location[0] - 50), SCALER * (node.location[1] - 50)))
     i += 1
 
 for node in enemy_nodes:
@@ -63,7 +66,7 @@ for node in enemy_nodes:
       <uri>model://rect_blue</uri>
       <pose>%.2f %.2f 0 0 0 0</pose>
     </include>
-''' % (i, node.location[0] * 2 - 100, node.location[1] * 2 - 100))
+''' % (i, SCALER * (node.location[0] - 50), SCALER * (node.location[1] - 50)))
     i += 1
 
 for node in dest_nodes:
@@ -72,7 +75,7 @@ for node in dest_nodes:
       <uri>model://rect_green</uri>
       <pose>%.2f %.2f 0 0 0 0</pose>
     </include>
-''' % (i, node.location[0] * 2 - 100, node.location[1] * 2 - 100))
+''' % (i, SCALER * (node.location[0] - 50), SCALER * (node.location[1] - 50)))
     i += 1
 
 file.write('''    <spherical_coordinates>

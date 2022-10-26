@@ -474,11 +474,11 @@
       <jointName>left_engine_propeller_joint</jointName>
       <linkName>left_propeller_link</linkName>
       <turningDirection>cw</turningDirection>
-      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantUp>0.125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1100</maxRotVelocity>
-      <motorConstant>0.5</motorConstant>
-      <momentConstant>0.1</momentConstant>
+      <maxRotVelocity>5000</maxRotVelocity>
+      <motorConstant>8.54858e-03</motorConstant>
+      <momentConstant>0.01</momentConstant>
       <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
       <motorNumber>0</motorNumber>
       <rotorDragCoefficient>0.000806428</rotorDragCoefficient>
@@ -491,11 +491,11 @@
       <jointName>right_engine_propeller_joint</jointName>
       <linkName>right_propeller_link</linkName>
       <turningDirection>cw</turningDirection>
-      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantUp>0.125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1100</maxRotVelocity>
-      <motorConstant>0.5</motorConstant>
-      <momentConstant>0.1</momentConstant>
+      <maxRotVelocity>5000</maxRotVelocity>
+      <motorConstant>8.54858e-03</motorConstant>
+      <momentConstant>0.01</momentConstant>
       <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
       <motorNumber>1</motorNumber>
       <rotorDragCoefficient>0.000806428</rotorDragCoefficient>
@@ -549,7 +549,7 @@
         <channel name="left_rotor">
           <input_index>0</input_index>
           <input_offset>0</input_offset>
-          <input_scaling>100</input_scaling>
+          <input_scaling>500</input_scaling>
           <zero_position_disarmed>0</zero_position_disarmed>
           <zero_position_armed>0</zero_position_armed>
           <joint_control_type>velocity</joint_control_type>
@@ -558,7 +558,7 @@
         <channel name="right_rotor">
           <input_index>1</input_index>
           <input_offset>0</input_offset>
-          <input_scaling>100</input_scaling>
+          <input_scaling>500</input_scaling>
           <zero_position_disarmed>0</zero_position_disarmed>
           <zero_position_armed>0</zero_position_armed>
           <joint_control_type>velocity</joint_control_type>

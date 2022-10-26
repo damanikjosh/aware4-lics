@@ -11,622 +11,622 @@
     <include>
       <name>rect red 1</name>
       <uri>model://rect_red</uri>
-      <pose>-100.00 0.00 2 0 0 0</pose>
+      <pose>-500.00 0.00 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 2</name>
       <uri>model://rect_red</uri>
-      <pose>-100.00 14.14 2 0 0 0</pose>
+      <pose>-500.00 70.71 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 3</name>
       <uri>model://rect_red</uri>
-      <pose>-100.00 28.28 2 0 0 0</pose>
+      <pose>-500.00 141.42 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 4</name>
       <uri>model://rect_red</uri>
-      <pose>-100.00 42.43 2 0 0 0</pose>
+      <pose>-500.00 212.13 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 5</name>
       <uri>model://rect_red</uri>
-      <pose>-100.00 56.57 2 0 0 0</pose>
+      <pose>-500.00 282.84 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 6</name>
       <uri>model://rect_red</uri>
-      <pose>-100.00 70.71 2 0 0 0</pose>
+      <pose>-500.00 353.55 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 7</name>
       <uri>model://rect_red</uri>
-      <pose>-100.00 84.85 2 0 0 0</pose>
+      <pose>-500.00 424.26 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 8</name>
       <uri>model://rect_red</uri>
-      <pose>-100.00 98.99 2 0 0 0</pose>
+      <pose>-500.00 494.97 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 9</name>
       <uri>model://rect_red</uri>
-      <pose>-85.86 0.00 2 0 0 0</pose>
+      <pose>-429.29 0.00 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 10</name>
       <uri>model://rect_red</uri>
-      <pose>-85.86 14.14 2 0 0 0</pose>
+      <pose>-429.29 70.71 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 11</name>
       <uri>model://rect_red</uri>
-      <pose>-85.86 28.28 2 0 0 0</pose>
+      <pose>-429.29 141.42 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 12</name>
       <uri>model://rect_red</uri>
-      <pose>-85.86 42.43 2 0 0 0</pose>
+      <pose>-429.29 212.13 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 13</name>
       <uri>model://rect_red</uri>
-      <pose>-85.86 56.57 2 0 0 0</pose>
+      <pose>-429.29 282.84 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 14</name>
       <uri>model://rect_red</uri>
-      <pose>-85.86 70.71 2 0 0 0</pose>
+      <pose>-429.29 353.55 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 15</name>
       <uri>model://rect_red</uri>
-      <pose>-85.86 84.85 2 0 0 0</pose>
+      <pose>-429.29 424.26 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 16</name>
       <uri>model://rect_red</uri>
-      <pose>-85.86 98.99 2 0 0 0</pose>
+      <pose>-429.29 494.97 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 17</name>
       <uri>model://rect_red</uri>
-      <pose>-71.72 0.00 2 0 0 0</pose>
+      <pose>-358.58 0.00 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 18</name>
       <uri>model://rect_red</uri>
-      <pose>-71.72 14.14 2 0 0 0</pose>
+      <pose>-358.58 70.71 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 19</name>
       <uri>model://rect_red</uri>
-      <pose>-71.72 28.28 2 0 0 0</pose>
+      <pose>-358.58 141.42 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 20</name>
       <uri>model://rect_red</uri>
-      <pose>-71.72 42.43 2 0 0 0</pose>
+      <pose>-358.58 212.13 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 21</name>
       <uri>model://rect_red</uri>
-      <pose>-71.72 56.57 2 0 0 0</pose>
+      <pose>-358.58 282.84 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 22</name>
       <uri>model://rect_red</uri>
-      <pose>-71.72 70.71 2 0 0 0</pose>
+      <pose>-358.58 353.55 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 23</name>
       <uri>model://rect_red</uri>
-      <pose>-71.72 84.85 2 0 0 0</pose>
+      <pose>-358.58 424.26 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 24</name>
       <uri>model://rect_red</uri>
-      <pose>-71.72 98.99 2 0 0 0</pose>
+      <pose>-358.58 494.97 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 25</name>
       <uri>model://rect_red</uri>
-      <pose>-57.57 0.00 2 0 0 0</pose>
+      <pose>-287.87 0.00 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 26</name>
       <uri>model://rect_red</uri>
-      <pose>-57.57 14.14 2 0 0 0</pose>
+      <pose>-287.87 70.71 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 27</name>
       <uri>model://rect_red</uri>
-      <pose>-57.57 28.28 2 0 0 0</pose>
+      <pose>-287.87 141.42 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 28</name>
       <uri>model://rect_red</uri>
-      <pose>-57.57 42.43 2 0 0 0</pose>
+      <pose>-287.87 212.13 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 29</name>
       <uri>model://rect_red</uri>
-      <pose>-57.57 56.57 2 0 0 0</pose>
+      <pose>-287.87 282.84 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 30</name>
       <uri>model://rect_red</uri>
-      <pose>-57.57 70.71 2 0 0 0</pose>
+      <pose>-287.87 353.55 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 31</name>
       <uri>model://rect_red</uri>
-      <pose>-57.57 84.85 2 0 0 0</pose>
+      <pose>-287.87 424.26 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 32</name>
       <uri>model://rect_red</uri>
-      <pose>-57.57 98.99 2 0 0 0</pose>
+      <pose>-287.87 494.97 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 33</name>
       <uri>model://rect_red</uri>
-      <pose>-43.43 0.00 2 0 0 0</pose>
+      <pose>-217.16 0.00 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 34</name>
       <uri>model://rect_red</uri>
-      <pose>-43.43 14.14 2 0 0 0</pose>
+      <pose>-217.16 70.71 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 35</name>
       <uri>model://rect_red</uri>
-      <pose>-43.43 28.28 2 0 0 0</pose>
+      <pose>-217.16 141.42 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 36</name>
       <uri>model://rect_red</uri>
-      <pose>-43.43 42.43 2 0 0 0</pose>
+      <pose>-217.16 212.13 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 37</name>
       <uri>model://rect_red</uri>
-      <pose>-43.43 56.57 2 0 0 0</pose>
+      <pose>-217.16 282.84 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 38</name>
       <uri>model://rect_red</uri>
-      <pose>-43.43 70.71 2 0 0 0</pose>
+      <pose>-217.16 353.55 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 39</name>
       <uri>model://rect_red</uri>
-      <pose>-43.43 84.85 2 0 0 0</pose>
+      <pose>-217.16 424.26 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 40</name>
       <uri>model://rect_red</uri>
-      <pose>-43.43 98.99 2 0 0 0</pose>
+      <pose>-217.16 494.97 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 41</name>
       <uri>model://rect_red</uri>
-      <pose>-29.29 0.00 2 0 0 0</pose>
+      <pose>-146.45 0.00 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 42</name>
       <uri>model://rect_red</uri>
-      <pose>-29.29 14.14 2 0 0 0</pose>
+      <pose>-146.45 70.71 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 43</name>
       <uri>model://rect_red</uri>
-      <pose>-29.29 28.28 2 0 0 0</pose>
+      <pose>-146.45 141.42 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 44</name>
       <uri>model://rect_red</uri>
-      <pose>-29.29 42.43 2 0 0 0</pose>
+      <pose>-146.45 212.13 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 45</name>
       <uri>model://rect_red</uri>
-      <pose>-29.29 56.57 2 0 0 0</pose>
+      <pose>-146.45 282.84 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 46</name>
       <uri>model://rect_red</uri>
-      <pose>-29.29 70.71 2 0 0 0</pose>
+      <pose>-146.45 353.55 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 47</name>
       <uri>model://rect_red</uri>
-      <pose>-29.29 84.85 2 0 0 0</pose>
+      <pose>-146.45 424.26 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 48</name>
       <uri>model://rect_red</uri>
-      <pose>-29.29 98.99 2 0 0 0</pose>
+      <pose>-146.45 494.97 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 49</name>
       <uri>model://rect_red</uri>
-      <pose>-15.15 14.14 2 0 0 0</pose>
+      <pose>-75.74 70.71 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 50</name>
       <uri>model://rect_red</uri>
-      <pose>-15.15 28.28 2 0 0 0</pose>
+      <pose>-75.74 141.42 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 51</name>
       <uri>model://rect_red</uri>
-      <pose>-15.15 42.43 2 0 0 0</pose>
+      <pose>-75.74 212.13 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 52</name>
       <uri>model://rect_red</uri>
-      <pose>-15.15 56.57 2 0 0 0</pose>
+      <pose>-75.74 282.84 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 53</name>
       <uri>model://rect_red</uri>
-      <pose>-15.15 70.71 2 0 0 0</pose>
+      <pose>-75.74 353.55 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 54</name>
       <uri>model://rect_red</uri>
-      <pose>-15.15 84.85 2 0 0 0</pose>
+      <pose>-75.74 424.26 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 55</name>
       <uri>model://rect_red</uri>
-      <pose>-15.15 98.99 2 0 0 0</pose>
+      <pose>-75.74 494.97 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 56</name>
       <uri>model://rect_red</uri>
-      <pose>-1.01 56.57 2 0 0 0</pose>
+      <pose>-5.03 282.84 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 57</name>
       <uri>model://rect_red</uri>
-      <pose>-1.01 70.71 2 0 0 0</pose>
+      <pose>-5.03 353.55 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 58</name>
       <uri>model://rect_red</uri>
-      <pose>-1.01 84.85 2 0 0 0</pose>
+      <pose>-5.03 424.26 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 59</name>
       <uri>model://rect_red</uri>
-      <pose>-1.01 98.99 2 0 0 0</pose>
+      <pose>-5.03 494.97 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 60</name>
       <uri>model://rect_red</uri>
-      <pose>13.14 84.85 2 0 0 0</pose>
+      <pose>65.69 424.26 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 61</name>
       <uri>model://rect_red</uri>
-      <pose>13.14 98.99 2 0 0 0</pose>
+      <pose>65.69 494.97 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 62</name>
       <uri>model://rect_red</uri>
-      <pose>14.14 36.57 2 0 0 0</pose>
+      <pose>70.71 182.84 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 63</name>
       <uri>model://rect_red</uri>
-      <pose>14.14 50.71 2 0 0 0</pose>
+      <pose>70.71 253.55 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 64</name>
       <uri>model://rect_red</uri>
-      <pose>14.14 64.85 2 0 0 0</pose>
+      <pose>70.71 324.26 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 65</name>
       <uri>model://rect_red</uri>
-      <pose>14.14 78.99 2 0 0 0</pose>
+      <pose>70.71 394.97 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 66</name>
       <uri>model://rect_red</uri>
-      <pose>28.28 8.28 2 0 0 0</pose>
+      <pose>141.42 41.42 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 67</name>
       <uri>model://rect_red</uri>
-      <pose>28.28 22.43 2 0 0 0</pose>
+      <pose>141.42 112.13 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 68</name>
       <uri>model://rect_red</uri>
-      <pose>28.28 36.57 2 0 0 0</pose>
+      <pose>141.42 182.84 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 69</name>
       <uri>model://rect_red</uri>
-      <pose>28.28 50.71 2 0 0 0</pose>
+      <pose>141.42 253.55 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 70</name>
       <uri>model://rect_red</uri>
-      <pose>28.28 64.85 2 0 0 0</pose>
+      <pose>141.42 324.26 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 71</name>
       <uri>model://rect_red</uri>
-      <pose>28.28 78.99 2 0 0 0</pose>
+      <pose>141.42 394.97 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 72</name>
       <uri>model://rect_red</uri>
-      <pose>28.28 93.14 2 0 0 0</pose>
+      <pose>141.42 465.69 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 73</name>
       <uri>model://rect_red</uri>
-      <pose>42.43 -20.00 2 0 0 0</pose>
+      <pose>212.13 -100.00 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 74</name>
       <uri>model://rect_red</uri>
-      <pose>42.43 -5.86 2 0 0 0</pose>
+      <pose>212.13 -29.29 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 75</name>
       <uri>model://rect_red</uri>
-      <pose>42.43 8.28 2 0 0 0</pose>
+      <pose>212.13 41.42 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 76</name>
       <uri>model://rect_red</uri>
-      <pose>42.43 22.43 2 0 0 0</pose>
+      <pose>212.13 112.13 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 77</name>
       <uri>model://rect_red</uri>
-      <pose>42.43 36.57 2 0 0 0</pose>
+      <pose>212.13 182.84 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 78</name>
       <uri>model://rect_red</uri>
-      <pose>42.43 50.71 2 0 0 0</pose>
+      <pose>212.13 253.55 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 79</name>
       <uri>model://rect_red</uri>
-      <pose>42.43 64.85 2 0 0 0</pose>
+      <pose>212.13 324.26 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 80</name>
       <uri>model://rect_red</uri>
-      <pose>42.43 78.99 2 0 0 0</pose>
+      <pose>212.13 394.97 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 81</name>
       <uri>model://rect_red</uri>
-      <pose>42.43 93.14 2 0 0 0</pose>
+      <pose>212.13 465.69 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 82</name>
       <uri>model://rect_red</uri>
-      <pose>56.57 -20.00 2 0 0 0</pose>
+      <pose>282.84 -100.00 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 83</name>
       <uri>model://rect_red</uri>
-      <pose>56.57 -5.86 2 0 0 0</pose>
+      <pose>282.84 -29.29 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 84</name>
       <uri>model://rect_red</uri>
-      <pose>56.57 8.28 2 0 0 0</pose>
+      <pose>282.84 41.42 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 85</name>
       <uri>model://rect_red</uri>
-      <pose>56.57 22.43 2 0 0 0</pose>
+      <pose>282.84 112.13 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 86</name>
       <uri>model://rect_red</uri>
-      <pose>56.57 36.57 2 0 0 0</pose>
+      <pose>282.84 182.84 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 87</name>
       <uri>model://rect_red</uri>
-      <pose>56.57 50.71 2 0 0 0</pose>
+      <pose>282.84 253.55 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 88</name>
       <uri>model://rect_red</uri>
-      <pose>56.57 64.85 2 0 0 0</pose>
+      <pose>282.84 324.26 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 89</name>
       <uri>model://rect_red</uri>
-      <pose>56.57 78.99 2 0 0 0</pose>
+      <pose>282.84 394.97 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 90</name>
       <uri>model://rect_red</uri>
-      <pose>56.57 93.14 2 0 0 0</pose>
+      <pose>282.84 465.69 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 91</name>
       <uri>model://rect_red</uri>
-      <pose>70.71 -20.00 2 0 0 0</pose>
+      <pose>353.55 -100.00 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 92</name>
       <uri>model://rect_red</uri>
-      <pose>70.71 -5.86 2 0 0 0</pose>
+      <pose>353.55 -29.29 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 93</name>
       <uri>model://rect_red</uri>
-      <pose>70.71 8.28 2 0 0 0</pose>
+      <pose>353.55 41.42 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 94</name>
       <uri>model://rect_red</uri>
-      <pose>70.71 22.43 2 0 0 0</pose>
+      <pose>353.55 112.13 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 95</name>
       <uri>model://rect_red</uri>
-      <pose>70.71 36.57 2 0 0 0</pose>
+      <pose>353.55 182.84 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 96</name>
       <uri>model://rect_red</uri>
-      <pose>70.71 50.71 2 0 0 0</pose>
+      <pose>353.55 253.55 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 97</name>
       <uri>model://rect_red</uri>
-      <pose>70.71 64.85 2 0 0 0</pose>
+      <pose>353.55 324.26 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 98</name>
       <uri>model://rect_red</uri>
-      <pose>70.71 78.99 2 0 0 0</pose>
+      <pose>353.55 394.97 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 99</name>
       <uri>model://rect_red</uri>
-      <pose>70.71 93.14 2 0 0 0</pose>
+      <pose>353.55 465.69 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 100</name>
       <uri>model://rect_red</uri>
-      <pose>84.85 -20.00 2 0 0 0</pose>
+      <pose>424.26 -100.00 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 101</name>
       <uri>model://rect_red</uri>
-      <pose>84.85 -5.86 2 0 0 0</pose>
+      <pose>424.26 -29.29 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 102</name>
       <uri>model://rect_red</uri>
-      <pose>84.85 8.28 2 0 0 0</pose>
+      <pose>424.26 41.42 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 103</name>
       <uri>model://rect_red</uri>
-      <pose>84.85 22.43 2 0 0 0</pose>
+      <pose>424.26 112.13 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 104</name>
       <uri>model://rect_red</uri>
-      <pose>84.85 36.57 2 0 0 0</pose>
+      <pose>424.26 182.84 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 105</name>
       <uri>model://rect_red</uri>
-      <pose>84.85 50.71 2 0 0 0</pose>
+      <pose>424.26 253.55 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 106</name>
       <uri>model://rect_red</uri>
-      <pose>84.85 64.85 2 0 0 0</pose>
+      <pose>424.26 324.26 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 107</name>
       <uri>model://rect_red</uri>
-      <pose>84.85 78.99 2 0 0 0</pose>
+      <pose>424.26 394.97 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 108</name>
       <uri>model://rect_red</uri>
-      <pose>84.85 93.14 2 0 0 0</pose>
+      <pose>424.26 465.69 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 109</name>
       <uri>model://rect_red</uri>
-      <pose>98.99 -20.00 2 0 0 0</pose>
+      <pose>494.97 -100.00 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 110</name>
       <uri>model://rect_red</uri>
-      <pose>98.99 -5.86 2 0 0 0</pose>
+      <pose>494.97 -29.29 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 111</name>
       <uri>model://rect_red</uri>
-      <pose>98.99 8.28 2 0 0 0</pose>
+      <pose>494.97 41.42 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 112</name>
       <uri>model://rect_red</uri>
-      <pose>98.99 22.43 2 0 0 0</pose>
+      <pose>494.97 112.13 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 113</name>
       <uri>model://rect_red</uri>
-      <pose>98.99 36.57 2 0 0 0</pose>
+      <pose>494.97 182.84 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 114</name>
       <uri>model://rect_red</uri>
-      <pose>98.99 50.71 2 0 0 0</pose>
+      <pose>494.97 253.55 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 115</name>
       <uri>model://rect_red</uri>
-      <pose>98.99 64.85 2 0 0 0</pose>
+      <pose>494.97 324.26 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 116</name>
       <uri>model://rect_red</uri>
-      <pose>98.99 78.99 2 0 0 0</pose>
+      <pose>494.97 394.97 4 0 0 0</pose>
     </include>
     <include>
       <name>rect red 117</name>
       <uri>model://rect_red</uri>
-      <pose>98.99 93.14 2 0 0 0</pose>
+      <pose>494.97 465.69 4 0 0 0</pose>
     </include>
     <include>
       <name>rect blue 118</name>
       <uri>model://rect_blue</uri>
-      <pose>-85.86 70.71 0 0 0 0</pose>
+      <pose>-429.29 353.55 0 0 0 0</pose>
     </include>
     <include>
       <name>rect blue 119</name>
       <uri>model://rect_blue</uri>
-      <pose>14.14 64.85 0 0 0 0</pose>
+      <pose>70.71 324.26 0 0 0 0</pose>
     </include>
     <include>
       <name>rect blue 120</name>
       <uri>model://rect_blue</uri>
-      <pose>56.57 -5.86 0 0 0 0</pose>
+      <pose>282.84 -29.29 0 0 0 0</pose>
     </include>
     <include>
       <name>rect blue 121</name>
       <uri>model://rect_blue</uri>
-      <pose>-43.43 56.57 0 0 0 0</pose>
+      <pose>-217.16 282.84 0 0 0 0</pose>
     </include>
     <include>
       <name>rect blue 122</name>
       <uri>model://rect_blue</uri>
-      <pose>70.71 36.57 0 0 0 0</pose>
+      <pose>353.55 182.84 0 0 0 0</pose>
     </include>
     <include>
       <name>rect green 123</name>
       <uri>model://rect_green</uri>
-      <pose>-60.00 0.00 0 0 0 0</pose>
+      <pose>-300.00 0.00 0 0 0 0</pose>
     </include>
     <include>
       <name>rect green 124</name>
       <uri>model://rect_green</uri>
-      <pose>0.00 50.00 0 0 0 0</pose>
+      <pose>0.00 250.00 0 0 0 0</pose>
     </include>
     <spherical_coordinates>
       <surface_model>EARTH_WGS84</surface_model>
